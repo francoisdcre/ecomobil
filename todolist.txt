@@ -1,0 +1,66 @@
+//Re-vérifier tous les models, il faut que des commandes sql
+
+//Faire la partie réservation avec des formulaire qui s'affiches l'un après l'autres, dans un premier temps saisir la ville,
+    puis saisir le nombre de participants (sachant que le client est censé être ajouter dans la table participant),
+    par exemple avec un formulaire : nombre de participant, si le nombre est 2, il faudra afficher 3 formulaires dont 2
+    qui contiennent des information à ajouter l'autre il faudra ajouter automatiquement avec les SESSION
+
+    //OU faire comme un systeme de panier avec un plus et moins 
+
+    //Choisir l'horraire de début de la réservation puis avec un menu déroulant ou un choix, sélectionner 1/2/3h ou 1/2journée
+        ou 1 journée
+
+//Faire le dashboard avec un suivi de réservation pour ajouter une demande spéciale
+
+//Enlever les écho pour les controllers / Model et crée des pages spécifiques (ex : Erreur de connexion) 
+    //potentiellement avec un template d'érreur et créer de nouvelles fonction dans la class ErrorController
+
+//Vérifier si l'email de l'utilisateur existe déjà avant la création de compte
+
+//Créer un SuccessController (ex: réservation réussi / Création de compte réussi)
+
+//Demander un mot de passe fort
+
+//Faire en sorte que les input du register soit bien préciser pour leurs types, ex : code postal => que des chiffres, pour date de réservation, ect...
+
+//Optimiser la partie réservation
+
+//Changer les $_SESSION dans la partie reservation
+
+//Mettre N journée pour la résa 
+
+//Faire la partie insertion dans la bdd pour la réservation
+
+//Faire un interface Admin pour la rentrée des véhicules
+
+//Faire un vrai panel admin avec la nav bar à gauche
+
+//Horraire d'écomobil : 8h-20h, selon le temps de réservation,
+    la plage horaire se grive puisque la restitution des véhicules
+    se fait manuellement
+
+//Ajouter un moyen de paiement (CB, PayPal, Chèque vacances)
+
+//Lors de la réservation, si aucun véhicule disponible, afficher "Aucun véhicule disponible dans cette ville"
+
+//Ajouter une limite au nombre de participant
+
+//Corriger les bugs :
+    //Sur les participants si on ajoute des participants et qu'on clique sur non faire que ça continue le formulaire, 
+    //Ne pas pouvoir sélectionner plus de véhicule que le nombre disponible
+    //(Prendre le $_SESSION['participantVehicule'], split dans un array les ID véhicules,
+    //et compter les ID qui sont présent plusieurs fois pour ensuite comparer avec le disponible count dans $_SESSION['vehiculeData'])
+
+Faire du css 
+
+Faire du responsive
+
+Rendre le code plus lisible et ajouter des commentaire
+
+Apprendre les fonctions et synthaxes que je ne maitrise pas
+
+Faire en sorte qu'ils ne puissent pas réservé si l'heure d'aujourd'hui est déjà passé
+
+
+
+
