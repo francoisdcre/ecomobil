@@ -51,8 +51,8 @@ class AuthController {
             }
         
             // Vérifier si le mot de passe est valide
-
-            if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]{8,16}$/', $password)) {
+            // /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]{8,16}$/
+            if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%])[a-zA-Z\d!@#$%]{8,16}$/', $password)) {
                 $error = new NotificationController();
                 $error->errorPassword();
                 exit();
@@ -74,6 +74,19 @@ class AuthController {
                 $error->errorRegister();
             }
         } elseif ($_SERVER['REQUEST_URI'] === '/login') {
+
+            if (!isset($_SESSION['loginAttempt'])) {
+                $_SESSION['loginAttempt'] = 0;
+                $_SESSION['blocked_until'] = NULL;
+            }
+
+            if ($_SESSION['blocked_until'] && time() < $_SESSION['blocked_until']) {
+                $error = new NotificationController();
+                $error->errorLoginAttempt();
+                $_SESSION['loginAttempt'] = 0;
+                exit();
+            }
+
             // Récupération des données du formulaire de connexion
             $email = $_POST['email'];
             $password = $_POST['password'];
@@ -98,13 +111,19 @@ class AuthController {
                     'role' => $user['role']
                 ];
 
+                $_SESSION['loginAttempt'] = 0;
+
                 // Régénérer l'identifiant de session
-                session_regenerate_id(true);
+                // session_regenerate_id(true);
 
                 // Redirection vers la page d'accueil
                 header('Location: /');
             } else {
                 // Affichage de l'erreur si la connexion a échoué
+                $_SESSION['loginAttempt']++;
+                if ($_SESSION['loginAttempt'] >= 3) {
+                    $_SESSION['blocked_until'] = time() + 10;
+                }
                 $error = new NotificationController();
                 $error->errorLogin();
             }

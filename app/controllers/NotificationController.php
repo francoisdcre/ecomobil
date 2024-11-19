@@ -66,10 +66,20 @@ class NotificationController  {
         require_once __DIR__ . '/../views/NotificationView.php';
     }
 
+    // Affichage de l'erreur si la réservation a échoué
+
     public function reservationError() {
         $title = 'Erreur';
         $error = 'Erreur lors de la réservation.';
         $message = 'Vous avez sélectionné des véhicules qui ne sont pas disponibles.';
+        require_once __DIR__ . '/../views/NotificationView.php';
+    }
+
+
+    public function errorLoginAttempt() {
+        $title = 'Erreur';
+        $error = 'Erreur lors de la connexion.';
+        $message = 'Vous avez essayé de vous connecter trop de fois. Veuillez réessayer plus tard.';
         require_once __DIR__ . '/../views/NotificationView.php';
     }
 }

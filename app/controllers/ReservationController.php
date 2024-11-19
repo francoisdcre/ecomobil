@@ -68,9 +68,11 @@ class ReservationController {
         } else if (isset($_POST['confirm'])) {
             $reservationStep = 6;
 
-            if ($this->disponibleCount() == false) {
-                $this->NotificationController->reservationError();
-                return;
+            if (isset($_SESSION['participantVehicule'])) {
+                if ($this->disponibleCount() == false) {
+                    $this->NotificationController->reservationError();
+                    return;
+                }
             }
 
             if (!empty($_POST['demandeSpecialeArea'])) {
