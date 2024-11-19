@@ -726,9 +726,13 @@ hr {
     flex-direction: column;
 }
 
+.table__container {
+    max-height: calc(100vh - 200px);
+    width: calc(100% - 200px);
+}
 
 .table__admin {
-    width: calc(100% - 200px);
+    width: 100%;
     border-collapse: collapse;
     margin: 20px 0;
     font-size: 16px;

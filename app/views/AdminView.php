@@ -29,59 +29,63 @@
                 <?php if ($_GET['action'] == 'getUsers') : ?>
                     <?php $users = $adminController->getUsers(); ?>
                     <h1>Utilisateurs</h1>
-                    <table class="table__admin">
-                        <tr>
-                            <th>Id</th>
-                            <th>Prénom</th>
-                            <th>Nom</th>
-                            <th>Email</th>
-                            <th>Ville</th>
-                            <th>Role</th>
-                        </tr>
-                        <?php
-                            foreach ($users as $user) {
-                                echo '<tr>';
-                                echo '<td>' . $user['idUtilisateur'] . '</td>';
-                                echo '<td>' . $user['prenom'] . '</td>';
-                                echo '<td>' . $user['nom'] . '</td>';
-                                echo '<td>' . $user['email'] . '</td>';
-                                echo '<td>' . $user['ville'] . '</td>';
-                                echo '<td>' . $user['role'] . '</td>';
-                                echo '</tr>';
-                            }
-                        ?>
-                    </table>
+                    <div class="table__container">
+                        <table class="table__admin">
+                            <tr>
+                                <th>Id</th>
+                                <th>Prénom</th>
+                                <th>Nom</th>
+                                <th>Email</th>
+                                <th>Ville</th>
+                                <th>Role</th>
+                            </tr>
+                            <?php
+                                foreach ($users as $user) {
+                                    echo '<tr>';
+                                    echo '<td>' . $user['idUtilisateur'] . '</td>';
+                                    echo '<td>' . $user['prenom'] . '</td>';
+                                    echo '<td>' . $user['nom'] . '</td>';
+                                    echo '<td>' . $user['email'] . '</td>';
+                                    echo '<td>' . $user['ville'] . '</td>';
+                                    echo '<td>' . $user['role'] . '</td>';
+                                    echo '</tr>';
+                                }
+                            ?>
+                        </table>
+                    </div>
                 <?php elseif ($_GET['action'] == 'getReservation') : ?>
                     <?php $reservation = $adminController->getReservation(); ?>
                     <h1>Réservations</h1>
-                    <table class="table__admin">
-                        <tr>
-                            <th>Id</th>
-                            <th>Id Utilisateur</th>
-                            <th>Date de début</th>
-                            <th>Date de fin</th>
-                            <th>Statut</th>
-                            <th>Montant</th>
-                            <th>Moyen de paiement</th>
-                            <th>Demande Spéciale</th>
-                            <th>Action</th>
-                        </tr>
-                        <?php
-                            foreach ($reservation as $resa) {
-                                echo '<tr>';
-                                echo '<td>' . $resa['idReservation'] . '</td>';
-                                echo '<td>' . $resa['fkIdUtilisateur'] . '</td>';
-                                echo '<td>' . $resa['dateDebut'] . '</td>';
-                                echo '<td>' . $resa['dateFin'] . '</td>';
-                                echo '<td>' . $resa['statut'] . '</td>';
-                                echo '<td>' . $resa['montant'] . '</td>';
-                                echo '<td>' . $resa['moyenPaiement'] . '</td>';
-                                echo '<td>' . $resa['demandeSpeciale'] . '</td>';
-                                echo '<td> <a href="admin?action=updateReservation&id=' . $resa['idReservation'] . '"> Mettre à jour </a></td>';
-                                echo '</tr>';
-                            }
-                        ?>
-                    </table>
+                    <div class="table__container">
+                        <table class="table__admin">
+                            <tr>
+                                <th>Id</th>
+                                <th>Id Utilisateur</th>
+                                <th>Date de début</th>
+                                <th>Date de fin</th>
+                                <th>Statut</th>
+                                <th>Montant</th>
+                                <th>Moyen de paiement</th>
+                                <th>Demande Spéciale</th>
+                                <th>Action</th>
+                            </tr>
+                            <?php
+                                foreach ($reservation as $resa) {
+                                    echo '<tr>';
+                                    echo '<td>' . $resa['idReservation'] . '</td>';
+                                    echo '<td>' . $resa['fkIdUtilisateur'] . '</td>';
+                                    echo '<td>' . $resa['dateDebut'] . '</td>';
+                                    echo '<td>' . $resa['dateFin'] . '</td>';
+                                    echo '<td>' . $resa['statut'] . '</td>';
+                                    echo '<td>' . $resa['montant'] . '</td>';
+                                    echo '<td>' . $resa['moyenPaiement'] . '</td>';
+                                    echo '<td>' . $resa['demandeSpeciale'] . '</td>';
+                                    echo '<td> <a href="admin?action=updateReservation&id=' . $resa['idReservation'] . '"> Mettre à jour </a></td>';
+                                    echo '</tr>';
+                                }
+                            ?>
+                        </table>
+                    </div>
                 <?php elseif ($_GET['action'] == 'updateReservation') : ?>
                     <?php $idReservation = $_GET['id']; ?>
                     <div class="update">
@@ -105,27 +109,29 @@
                 <?php elseif ($_GET['action'] == 'getVehicule') : ?>
                     <?php $vehicle = $adminController->getVehicle(); ?>
                     <h1>Vehicules réservé</h1>
-                    <table class="table__admin">
-                        <tr>
-                            <th>Id</th>
-                            <th>Statut</th>
-                            <th>fkIdTypeVehicule</th>
-                            <th>fkIdAgence</th>
-                            <th>Action</th>
-                        </tr>
-                        <?php
-                            foreach ($vehicle as $vehicule) {
-                                echo '<tr>';
-                                echo '<td>' . $vehicule['idVehicule'] . '</td>';
-                                echo '<td>' . $vehicule['statut'] . '</td>';
-                                echo '<td>' . $vehicule['fkIdTypeVehicule'] . '</td>';
-                                echo '<td>' . $vehicule['fkIdAgence'] . '</td>';
-                                echo '<td> <a href="admin?action=updateVehicle&id=' . $vehicule['idVehicule'] . '"> Mettre à jour </a></td>';
-                                echo '</tr>';
-                                // Faire apparaitre une page en JS qui demande si on veut le mettre en disponible ou en réparation
-                            }
-                        ?>
-                    </table>
+                    <div class="table__container">
+                        <table class="table__admin">
+                            <tr>
+                                <th>Id</th>
+                                <th>Statut</th>
+                                <th>fkIdTypeVehicule</th>
+                                <th>fkIdAgence</th>
+                                <th>Action</th>
+                            </tr>
+                            <?php
+                                foreach ($vehicle as $vehicule) {
+                                    echo '<tr>';
+                                    echo '<td>' . $vehicule['idVehicule'] . '</td>';
+                                    echo '<td>' . $vehicule['statut'] . '</td>';
+                                    echo '<td>' . $vehicule['fkIdTypeVehicule'] . '</td>';
+                                    echo '<td>' . $vehicule['fkIdAgence'] . '</td>';
+                                    echo '<td> <a href="admin?action=updateVehicle&id=' . $vehicule['idVehicule'] . '"> Mettre à jour </a></td>';
+                                    echo '</tr>';
+                                    // Faire apparaitre une page en JS qui demande si on veut le mettre en disponible ou en réparation
+                                }
+                            ?>
+                        </table>
+                    </div>
                 <?php elseif ($_GET['action'] == 'updateVehicle') : ?>
                     <?php $idVehicule = $_GET['id']; ?>
                     <div class="update">
@@ -148,28 +154,30 @@
                 <?php elseif ($_GET['action'] == 'getParticipants') : ?>
                     <?php $participants = $adminController->getParticipants(); ?>
                     <h1>Participants</h1>
-                    <table class="table__admin">
-                        <tr>
-                            <th>Id</th>
-                            <th>Prénom</th>
-                            <th>Nom</th>
-                            <th>Email</th>
-                            <th>fkIdVehicule</th>
-                            <th>fkIdReservation</th>
-                        </tr>
-                        <?php
-                            foreach ($participants as $participant) {
-                                echo '<tr>';
-                                echo '<td>' . $participant['idParticipant'] . '</td>';
-                                echo '<td>' . $participant['prenom'] . '</td>';
-                                echo '<td>' . $participant['nom'] . '</td>';
-                                echo '<td>' . $participant['email'] . '</td>';
-                                echo '<td>' . $participant['fkIdVehicule'] . '</td>';
-                                echo '<td>' . $participant['fkIdReservation'] . '</td>';
-                                echo '</tr>';
-                            }
-                        ?>
-                    </table>
+                    <div class="table__container">
+                        <table class="table__admin">
+                            <tr>
+                                <th>Id</th>
+                                <th>Prénom</th>
+                                <th>Nom</th>
+                                <th>Email</th>
+                                <th>fkIdVehicule</th>
+                                <th>fkIdReservation</th>
+                            </tr>
+                            <?php
+                                foreach ($participants as $participant) {
+                                    echo '<tr>';
+                                    echo '<td>' . $participant['idParticipant'] . '</td>';
+                                    echo '<td>' . $participant['prenom'] . '</td>';
+                                    echo '<td>' . $participant['nom'] . '</td>';
+                                    echo '<td>' . $participant['email'] . '</td>';
+                                    echo '<td>' . $participant['fkIdVehicule'] . '</td>';
+                                    echo '<td>' . $participant['fkIdReservation'] . '</td>';
+                                    echo '</tr>';
+                                }
+                            ?>
+                        </table>
+                    </div>
                 <?php endif; ?>
             <?php else : ?>
                 <h1>Panel Admin</h1>

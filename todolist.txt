@@ -60,7 +60,3 @@ Rendre le code plus lisible et ajouter des commentaire
 Apprendre les fonctions et synthaxes que je ne maitrise pas
 
 Faire en sorte qu'ils ne puissent pas réservé si l'heure d'aujourd'hui est déjà passé
-
-
-
-
