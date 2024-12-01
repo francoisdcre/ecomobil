@@ -61,6 +61,7 @@
                             <tr>
                                 <th>Id</th>
                                 <th>Id Utilisateur</th>
+                                <th>Agence</th>
                                 <th>Date de début</th>
                                 <th>Date de fin</th>
                                 <th>Statut</th>
@@ -74,6 +75,7 @@
                                     echo '<tr>';
                                     echo '<td>' . $resa['idReservation'] . '</td>';
                                     echo '<td>' . $resa['fkIdUtilisateur'] . '</td>';
+                                    echo '<td>' . $resa['nomAgence'] . '</td>';
                                     echo '<td>' . $resa['dateDebut'] . '</td>';
                                     echo '<td>' . $resa['dateFin'] . '</td>';
                                     echo '<td>' . $resa['statut'] . '</td>';
@@ -115,7 +117,7 @@
                                 <th>Id</th>
                                 <th>Statut</th>
                                 <th>fkIdTypeVehicule</th>
-                                <th>fkIdAgence</th>
+                                <th>Agence</th>
                                 <th>Action</th>
                             </tr>
                             <?php
@@ -124,10 +126,9 @@
                                     echo '<td>' . $vehicule['idVehicule'] . '</td>';
                                     echo '<td>' . $vehicule['statut'] . '</td>';
                                     echo '<td>' . $vehicule['fkIdTypeVehicule'] . '</td>';
-                                    echo '<td>' . $vehicule['fkIdAgence'] . '</td>';
+                                    echo '<td>' . $vehicule['nomAgence'] . '</td>';
                                     echo '<td> <a href="admin?action=updateVehicle&id=' . $vehicule['idVehicule'] . '"> Mettre à jour </a></td>';
                                     echo '</tr>';
-                                    // Faire apparaitre une page en JS qui demande si on veut le mettre en disponible ou en réparation
                                 }
                             ?>
                         </table>

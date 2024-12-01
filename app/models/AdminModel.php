@@ -23,7 +23,20 @@ Class AdminModel {
     // Méthode pour récupérer les réservations
 
     public function getReservation() {
-        $query = $this->bdd->prepare('SELECT * FROM reservation');
+        $query = $this->bdd->prepare('
+        SELECT 
+            r.*,
+            a.nom AS nomAgence
+        FROM 
+            reservation r
+        JOIN 
+            participant p ON r.idReservation = p.fkIdReservation
+        JOIN 
+            vehicule v ON p.fkIdVehicule = v.idVehicule
+        JOIN 
+            agences a ON v.fkIdAgence = a.idAgence
+        GROUP BY 
+            r.idReservation;');
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -31,7 +44,16 @@ Class AdminModel {
     // Méthode pour récupérer les véhicules
 
     public function getVehicle() {
-        $query = $this->bdd->prepare('SELECT * FROM vehicule where statut != "Disponible"');
+        $query = $this->bdd->prepare('
+        SELECT 
+            v.*,
+            a.nom AS nomAgence
+        FROM 
+            vehicule v
+        JOIN 
+            agences a ON v.fkIdAgence = a.idAgence
+        WHERE 
+            v.statut != "Disponible";');
         $query->execute();
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }

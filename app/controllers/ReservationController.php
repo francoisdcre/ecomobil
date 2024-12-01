@@ -90,12 +90,12 @@ class ReservationController {
 
             $this->selectVehicule();
             $_SESSION['reservationId'] =  $this->reservationModel->confirmReservation();
-            
-            $this->reservationModel->addParticipant($_SESSION['user']['nom'], $_SESSION['user']['prenom'], $_SESSION['user']['email'], $_SESSION['reservantVehicule'], $_SESSION['reservationId']);
+
+            $this->reservationModel->addParticipant($_SESSION['user']['nom'], $_SESSION['user']['prenom'], $_SESSION['user']['email'], end($_SESSION['userVehicule']), $_SESSION['reservationId']);
 
             if (isset($_SESSION['participantNom'])) {
                 foreach ($_SESSION['participantNom'] as $key => $nom) {
-                    $this->reservationModel->addParticipant($_SESSION['participantNom'][$key], $_SESSION['participantPrenom'][$key], $_SESSION['participantEmail'][$key], $_SESSION['participantVehicule'][$key], $_SESSION['reservationId']);
+                    $this->reservationModel->addParticipant($_SESSION['participantNom'][$key], $_SESSION['participantPrenom'][$key], $_SESSION['participantEmail'][$key], $_SESSION['userVehicule'][$key], $_SESSION['reservationId']);
                 }
             }
 

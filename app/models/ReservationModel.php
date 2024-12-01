@@ -141,16 +141,23 @@ class ReservationModel {
         $query = $this->bdd->prepare('
             SELECT 
                 r.*,
-                a.nom AS agence
+                a.nom AS nomAgence
             FROM 
                 reservation r
             JOIN 
-                vehicule v ON r.idReservation = v.idVehicule
+                participant p ON r.idReservation = p.fkIdReservation
+            JOIN 
+                vehicule v ON p.fkIdVehicule = v.idVehicule
             JOIN 
                 agences a ON v.fkIdAgence = a.idAgence
             WHERE 
-                r.fkIdUtilisateur = :fkIdUtilisateur');
-        $query->execute(array(':fkIdUtilisateur' => $_SESSION['user']['idUtilisateur']));
+                r.fkIdUtilisateur = :fkIdUtilisateur
+            GROUP BY
+                r.idReservation');
+        $query->execute(array(
+            
+            ':fkIdUtilisateur' => $_SESSION['user']['idUtilisateur']
+        ));
         $reservation = $query->fetchAll();
         return $reservation;
     }

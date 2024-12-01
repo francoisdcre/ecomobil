@@ -4,7 +4,15 @@
 
 class AuthController {
 
+    private $notificationController;
+    private $authModel;
+
     // Méthode get pour afficher la page souhaiter
+
+    public function __construct() {
+        $this->notificationController = new NotificationController();
+        $this->authModel = new AuthModel();
+    }
 
     public function get() {
         if ($_SERVER['REQUEST_URI'] === '/register') {
@@ -14,16 +22,8 @@ class AuthController {
         } elseif ($_SERVER['REQUEST_URI'] === '/logout') {
             $this->logout();
         } else {
-            $error = new NotificationController();
-            $error->error404();
+            $this->notificationController->error404();
         }
-    }
-
-    // Méthode pour nettoyer les données du formulaire
-
-    function sanitize_input($data) {
-        $data = preg_replace('/\s*<[^>]*>\s*/', '', $data);
-        return htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
     }
 
     // Méthode post pour traiter les données du formulaire
@@ -44,95 +44,124 @@ class AuthController {
 
             // Vérifier si l'email est valide
 
-            if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $error = new NotificationController();
-                $error->errorEmail();
-                exit();
-            }
+            $this->isValidEmail($email);
         
             // Vérifier si le mot de passe est valide
-            // /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_])[a-zA-Z\d\W_]{8,16}$/
-            if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%])[a-zA-Z\d!@#$%]{8,16}$/', $password)) {
-                $error = new NotificationController();
-                $error->errorPassword();
-                exit();
-            }
 
-            // Création d'une instance du modèle
-            $register = new AuthModel();
+            $this->isValidPassword($password);
         
             // Appel de la méthode register et capture du résultat
-            $result = $register->register($email, $nom, $prenom, $rue, $code_postal, $ville, $region, $telephone, $pays, $password);
+            $result = $this->authModel->register($email, $nom, $prenom, $rue, $code_postal, $ville, $region, $telephone, $pays, $password);
         
             if ($result === true) {
+
                 // Redirection si l'inscription est réussie
-                $success = new NotificationController();
-                $success->InscriptionSuccess();
+
+                $this->notificationController->InscriptionSuccess();
             } else {
+
                 // Affichage de l'erreur si l'inscription a échoué
-                $error = new NotificationController();
-                $error->errorRegister();
+
+                $this->notificationController->errorRegister();
             }
         } elseif ($_SERVER['REQUEST_URI'] === '/login') {
 
-            if (!isset($_SESSION['loginAttempt'])) {
-                $_SESSION['loginAttempt'] = 0;
-                $_SESSION['blocked_until'] = NULL;
-            }
-
-            if ($_SESSION['blocked_until'] && time() < $_SESSION['blocked_until']) {
-                $error = new NotificationController();
-                $error->errorLoginAttempt();
-                $_SESSION['loginAttempt'] = 0;
-                exit();
-            }
+            // $this->isBlocked();
 
             // Récupération des données du formulaire de connexion
+
             $email = $_POST['email'];
             $password = $_POST['password'];
-            $register = new AuthModel();
-            $user = $register->login($email, $password);
+            $user = $this->authModel->login($email, $password);
 
             // Vérifier si l'utilisateur existe et si le mot de passe est correct
+
             if ($user && password_verify($password, $user['motDePasse'])) {
 
                 // Stocker les informations de l'utilisateur dans la session
-                $_SESSION['user'] = [
-                    'idUtilisateur' => $user['idUtilisateur'],
-                    'email' => $user['email'],
-                    'nom' => $user['nom'],
-                    'prenom' => $user['prenom'],
-                    'telephone' => $user['telephone'],
-                    'rue' => $user['rue'],
-                    'codePostal' => $user['codePostal'],
-                    'ville' => $user['ville'],
-                    'region' => $user['region'],
-                    'pays' => $user['pays'],
-                    'role' => $user['role']
-                ];
 
-                $_SESSION['loginAttempt'] = 0;
+                $this->storeUserInSession($user);
 
-                // Régénérer l'identifiant de session
-                // session_regenerate_id(true);
+                // $_SESSION['loginAttempt'] = 0;
 
                 // Redirection vers la page d'accueil
+
                 header('Location: /');
             } else {
                 // Affichage de l'erreur si la connexion a échoué
-                $_SESSION['loginAttempt']++;
-                if ($_SESSION['loginAttempt'] >= 3) {
-                    $_SESSION['blocked_until'] = time() + 10;
-                }
-                $error = new NotificationController();
-                $error->errorLogin();
+
+                // $_SESSION['loginAttempt']++;
+
+                // $this->isBlocked();
+
+                $this->notificationController->errorLogin();
             }
         } else {
             // Affichage de l'erreur si la page n'existe pas
-            $error = new NotificationController();
-            $error->error404();
+            $this->notificationController->error404();
         }
     }
+
+    // Méthode pour nettoyer les données du formulaire
+
+    public function sanitize_input($data) {
+        $data = preg_replace('/\s*<[^>]*>\s*/', '', $data);
+        return htmlspecialchars($data, ENT_QUOTES, 'UTF-8');
+    }
+
+    // Méthode pour vérifier si le mot de passe est valide
+
+    public function isValidPassword($password) {
+        if (!preg_match('/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%])[a-zA-Z\d!@#$%]{8,16}$/', $password)) {
+            $this->notificationController->errorPassword();
+            exit();
+        }
+    }
+
+    // Méthode pour vérifier si l'email est valide
+
+    public function isValidEmail($email) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $this->notificationController->errorEmail();
+        }
+    }
+
+    // Stocker les informations de l'utilisateur dans la session
+
+    public function storeUserInSession($user) {
+        $_SESSION['user'] = [
+            'idUtilisateur' => $user['idUtilisateur'],
+            'email' => $user['email'],
+            'nom' => $user['nom'],
+            'prenom' => $user['prenom'],
+            'telephone' => $user['telephone'],
+            'rue' => $user['rue'],
+            'codePostal' => $user['codePostal'],
+            'ville' => $user['ville'],
+            'region' => $user['region'],
+            'pays' => $user['pays'],
+            'role' => $user['role']
+        ];
+    }
+
+    // Vériier si l'utilisateur est bloqué
+
+    // public function isBlocked() {
+    //     if ($_SESSION['blocked_until'] && time() < $_SESSION['blocked_until']) {
+    //         $this->notificationController->errorLoginAttempt();
+    //         $_SESSION['loginAttempt'] = 0;
+    //         exit();
+    //     }
+
+    //     if ($_SESSION['loginAttempt'] >= 3) {
+    //         $_SESSION['blocked_until'] = time() + 20;
+    //     }
+
+    //     if (!isset($_SESSION['loginAttempt'])) {
+    //         $_SESSION['loginAttempt'] = 0;
+    //         $_SESSION['blocked_until'] = NULL;
+    //     }
+    // }
 
     // Méthode pour se déconnecter
 

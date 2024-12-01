@@ -121,10 +121,24 @@ SELECT * FROM typevehicule;
 SELECT * FROM utilisateur;
 SELECT * FROM vehicule;
 
-SELECT * FROM vehicule where fkIdAgence = 1;
+SELECT * FROM vehicule where statut != "Disponible";
 
 UPDATE utilisateur
 SET role = 'admin'
 WHERE idUtilisateur = 1;
 
-SELECT * FROM vehicule where statut = 'réservé';
+SELECT 
+    r.*,
+    a.nom AS nomAgence
+FROM 
+    reservation r
+JOIN 
+    participant p ON r.idReservation = p.fkIdReservation
+JOIN 
+    vehicule v ON p.fkIdVehicule = v.idVehicule
+JOIN 
+    agences a ON v.fkIdAgence = a.idAgence
+GROUP BY 
+    r.idReservation;
+
+

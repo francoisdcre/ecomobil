@@ -100,7 +100,7 @@
                         foreach ($reservation as $reservations) {
                             echo '<tr>';
                             echo '<td>' . $reservations['idReservation'] . '</td>';
-                            echo '<td>' . $reservations['agence'] . '</td>';
+                            echo '<td>' . $reservations['nomAgence'] . '</td>';
                             echo '<td>' . $reservations['dateDebut'] . '</td>';
                             echo '<td>' . $reservations['dateFin'] . '</td>';
                             echo '<td>' . $reservations['statut'] . '</td>';
