@@ -57,6 +57,8 @@ Faire du responsive
 
 Rendre le code plus lisible et ajouter des commentaire
 
-Apprendre les fonctions et synthaxes que je ne maitrise pas
+Apprendre les fonctions et synthaxes que je ne maitrise pas (reggex et js et autre php)
 
 Faire en sorte qu'ils ne puissent pas réservé si l'heure d'aujourd'hui est déjà passé
+
+Splitter la liste de véhicule et la réservation

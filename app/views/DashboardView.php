@@ -21,6 +21,7 @@
                 <img src="/image/logo.png" class="navbar__logo">
                 <li><a href="/" class="navbar__item--a">Home</a></li>
                 <li><a href="vehicule" class="navbar__item--a">Vehicule</a></li>
+                <li><a href="reservation" class="navbar__item--a">Réservation</a></li>
                 <li><a href="agences" class="navbar__item--a">Agences</a></li>
             </ul>
             <ul class="navbar__links--main">
