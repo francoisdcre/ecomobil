@@ -16,17 +16,17 @@
 <pre>
 Ecomobil-main/
 ├── app/
-│   ├── controllers/       # Controleurs PHP pour la logique metier
-│   ├── models/            # Modeles pour gerer les donnees
-│   └── views/             # Vues pour l'affichage des pages
-├── config/                # Fichiers SQL pour la base de donnees
-├── core/                  # Configuration de l'autoloading et du routeur
+│   ├── controllers/
+│   ├── models/
+│   └── views/
+├── config/
+├── core/
 ├── public/
-│   ├── css/               # Feuilles de style
-│   ├── js/                # Scripts JavaScript
-│   ├── image/             # Images du site
-│   └── index.php          # Point d'entree principal
-└── README.md              # Fichier de documentation
+│   ├── css/
+│   ├── js/
+│   ├── image/
+│   └── index.php
+└── README.md
 </pre>
 
 <h2>Competences acquises</h2>
