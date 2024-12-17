@@ -109,7 +109,10 @@ INSERT INTO vehicule (statut, fkIdTypeVehicule, fkIdAgence) VALUES
 ('Disponible', 6, 4), ('Disponible', 6, 4), ('Disponible', 6, 4), ('Disponible', 6, 4), ('Disponible', 6, 4);
 
 
+/* MDP : Admin123! */
 
+INSERT INTO utilisateur (email, motDePasse, nom, prenom, telephone, rue, codePostal, ville, region, pays, role) VALUES
+('john@doe.com', '$2y$10$FY2fbZbxxKDYC3lRoe6cPOoXM6bHpJeNPBTPUUhS5ZBbTxvdT.fp.', 'John', 'Doe', '0123456789', '123 rue de la république', '01234', 'Paris', 'Ile de France', 'France', 'admin');
 
 SELECT * FROM agences;
 SELECT * FROM entrepot;
@@ -120,25 +123,3 @@ SELECT * FROM tarification;
 SELECT * FROM typevehicule;
 SELECT * FROM utilisateur;
 SELECT * FROM vehicule;
-
-SELECT * FROM vehicule where statut != "Disponible";
-
-UPDATE utilisateur
-SET role = 'admin'
-WHERE idUtilisateur = 1;
-
-SELECT 
-    r.*,
-    a.nom AS nomAgence
-FROM 
-    reservation r
-JOIN 
-    participant p ON r.idReservation = p.fkIdReservation
-JOIN 
-    vehicule v ON p.fkIdVehicule = v.idVehicule
-JOIN 
-    agences a ON v.fkIdAgence = a.idAgence
-GROUP BY 
-    r.idReservation;
-
-

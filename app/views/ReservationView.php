@@ -176,7 +176,7 @@
                 </select>
                 <label for="heure">Heure de réservation</label>
                 <input type="time" name="heure" id="hours" min="08:00" max="19:00" required>
-                <input type="number" name="days" id="days" placeholder="Nombre de jours" value="1" min="1" style="display: none;" required>
+                <input type="number" name="days" id="days" placeholder="Nombre de jours" value="1" min="1" style="display: none;" required placeholder="Nombre de jours">
                 <button type="submit">Confirmer la réservation</button>
             </form>
         <?php } if ($reservationStep == 5) { ?>
