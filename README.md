@@ -15,18 +15,18 @@
 <p>Voici les principaux fichiers du projet :</p>
 <pre>
 Ecomobil-main/
-├── app/
-│   ├── controllers/
-│   ├── models/
-│   └── views/
-├── config/
-├── core/
-├── public/
-│   ├── css/
-│   ├── js/
-│   ├── image/
-│   └── index.php
-└── README.md
+|-- app/
+|   |-- controllers/
+|   |-- models/
+|   |-- views/
+|-- config/
+|-- core/
+|-- public/
+|   |-- css/
+|   |-- js/
+|   |-- image/
+|   |-- index.php
+|-- README.md
 </pre>
 
 <h2>Competences acquises</h2>
