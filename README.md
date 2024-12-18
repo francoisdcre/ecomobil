@@ -39,3 +39,12 @@ Ecomobil-main/
 
 <hr>
 <p>Decouvrez la gestion simplifiee des reservations et des vehicules avec ce projet complet de plateforme Ecomobil !</p>
+
+
+![Index](https://raw.githubusercontent.com/francoisdcre/ecomobil/main/preview/index.PNG)
+![Liste des véhicules](https://raw.githubusercontent.com/francoisdcre/ecomobil/main/preview/vehicule.PNG)
+![Réservation](https://raw.githubusercontent.com/francoisdcre/ecomobil/main/preview/reservation.PNG)
+![Dashboard](https://raw.githubusercontent.com/francoisdcre/ecomobil/main/preview/dashboard.PNG)
+![Panel administrateur](https://raw.githubusercontent.com/francoisdcre/ecomobil/main/preview/panel-admin.PNG)
+
+
