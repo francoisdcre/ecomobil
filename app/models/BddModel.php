@@ -23,7 +23,7 @@ class BddModel {
             $this->conn = new PDO('mysql:host=' . $this->host . '; dbname=' . $this->dbname . '; charset=utf8', $this->username, $this->password, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
         } catch (Exception $e) {
             echo 'Erreur de connexion à la base de données : ' . $e->getMessage();
-            echo $this->password;
+            echo 'password : ' . $this->password;
         }
         return $this->conn;
     }
