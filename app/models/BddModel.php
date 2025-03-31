@@ -16,7 +16,7 @@ class BddModel {
     // Méthode pour la connexion à la base de données
 
     public function getConnection() {
-        $this->env = parse_ini_file(__DIR__ . '/../../.env');
+        $this->env = parse_ini_file(__DIR__ . '/../../../.env');
         $this->password = $this->env['ECOMOBIL_BDD'];
         $this->conn = null;
         try {
